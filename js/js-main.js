@@ -1,13 +1,13 @@
-const footer = document.getElementById('Date');
+const footer = document.getElementById("Date");
 const year = new Date().getFullYear();
 footer.innerHTML =
   year + '&copy; <a href="https://t.me/soko1enkov">Direct me</a>';
 
 // days counter
-const daysBox = document.getElementById('Days');
-const hoursBox = document.getElementById('Hours');
-const minutesBox = document.getElementById('Minutes');
-const secondsBox = document.getElementById('Seconds');
+const daysBox = document.getElementById("Days");
+const hoursBox = document.getElementById("Hours");
+const minutesBox = document.getElementById("Minutes");
+const secondsBox = document.getElementById("Seconds");
 const judgeDay = () => {
   let beginDate = new Date(2021, 0, 1).getTime();
   let nowDate = new Date().getTime();
@@ -20,13 +20,13 @@ const judgeDay = () => {
   );
   let seconds = Math.floor(((nowDate - beginDate) % (1000 * 60)) / 1000);
   if (hours < 10) {
-    hours = '0' + hours;
+    hours = "0" + hours;
   }
   if (minutes < 10) {
-    minutes = '0' + minutes;
+    minutes = "0" + minutes;
   }
   if (seconds < 10) {
-    seconds = '0' + seconds;
+    seconds = "0" + seconds;
   }
   daysBox.innerText = days;
   hoursBox.innerText = hours;
@@ -36,7 +36,7 @@ const judgeDay = () => {
 setInterval(judgeDay, 1000);
 
 $(function () {
-  'use strict';
+  "use strict";
 
   var width = $(window).width();
   var height = $(window).height();
@@ -44,20 +44,20 @@ $(function () {
   /***
    **** Preloader
    ***/
-  $(window).on('load', function () {
-    $('.preloader .spinner').fadeOut(function () {
-      $('.preloader').fadeOut();
-      $('body').addClass('ready');
+  $(window).on("load", function () {
+    $(".preloader .spinner").fadeOut(function () {
+      $(".preloader").fadeOut();
+      $("body").addClass("ready");
     });
   });
 
   /***
    **** Portfolio Filter
    ***/
-  $('.filter').on('click', 'a', function () {
-    var filter = $(this).attr('data-filter');
+  $(".filter").on("click", "a", function () {
+    var filter = $(this).attr("data-filter");
 
-    $('.work-item').hide();
+    $(".work-item").hide();
     $(filter).fadeIn();
 
     return false;
@@ -66,36 +66,36 @@ $(function () {
   /***
    **** Initialize collapse button
    ***/
-  $('.menu-btn').sideNav();
-  if (width < 1080) {
-    $('.side-nav').css({ transform: 'translateX(-100%)' });
+  $(".menu-btn").sideNav();
+  if (width < 1141) {
+    $(".side-nav").css({ transform: "translateX(-100%)" });
   }
 
   /***
    **** SideNav Menu Scroll
    ***/
-  if ($('#home-section').length) {
-    $(window).on('scroll', function () {
+  if ($("#home-section").length) {
+    $(window).on("scroll", function () {
       var scrollPos = $(window).scrollTop();
-      $('.side-nav li > a').each(function () {
+      $(".side-nav li > a").each(function () {
         var currLink = $(this);
-        var refElement = $(currLink.attr('href'));
+        var refElement = $(currLink.attr("href"));
         if (refElement.offset().top - 30 <= scrollPos) {
-          $('.side-nav li').removeClass('active');
-          currLink.closest('li').addClass('active');
+          $(".side-nav li").removeClass("active");
+          currLink.closest("li").addClass("active");
         }
       });
     });
   }
 
-  $('.scrollspy').scrollSpy({
+  $(".scrollspy").scrollSpy({
     scrollOffset: 0,
   });
 
   /***
    **** Validate contact form
    ***/
-  $('#cform').validate({
+  $("#cform").validate({
     rules: {
       name: {
         required: true,
@@ -112,33 +112,33 @@ $(function () {
       },
     },
     highlight: function (element) {
-      $(element).addClass('invalid');
-      $(element).removeClass('valid');
+      $(element).addClass("invalid");
+      $(element).removeClass("valid");
     },
     unhighlight: function (element) {
-      $(element).removeClass('invalid');
-      $(element).addClass('valid');
+      $(element).removeClass("invalid");
+      $(element).addClass("valid");
     },
-    success: 'valid',
+    success: "valid",
     submitHandler: function () {
       $.ajax({
-        url: 'mailer/feedback.php',
-        type: 'post',
-        dataType: 'json',
+        url: "mailer/feedback.php",
+        type: "post",
+        dataType: "json",
         data:
-          'name=' +
-          $('#cform').find('input[name="name"]').val() +
-          '&email=' +
-          $('#cform').find('input[name="email"]').val() +
-          '&subject=' +
-          $('#cform').find('input[name="subject"]').val() +
-          '&message=' +
-          $('#cform').find('textarea[name="message"]').val(),
+          "name=" +
+          $("#cform").find('input[name="name"]').val() +
+          "&email=" +
+          $("#cform").find('input[name="email"]').val() +
+          "&subject=" +
+          $("#cform").find('input[name="subject"]').val() +
+          "&message=" +
+          $("#cform").find('textarea[name="message"]').val(),
         beforeSend: function () {},
         complete: function () {},
         success: function (data) {
-          $('#cform').fadeOut();
-          $('.alert-success').delay(1000).fadeIn();
+          $("#cform").fadeOut();
+          $(".alert-success").delay(1000).fadeIn();
         },
       });
     },
@@ -147,7 +147,7 @@ $(function () {
   /***
    **** Validate comments form
    ***/
-  $('#blog-form').validate({
+  $("#blog-form").validate({
     rules: {
       name: {
         required: true,
@@ -161,38 +161,38 @@ $(function () {
       },
     },
     highlight: function (element) {
-      $(element).addClass('invalid');
-      $(element).removeClass('valid');
+      $(element).addClass("invalid");
+      $(element).removeClass("valid");
     },
     unhighlight: function (element) {
-      $(element).removeClass('invalid');
-      $(element).addClass('valid');
+      $(element).removeClass("invalid");
+      $(element).addClass("valid");
     },
-    success: 'valid',
+    success: "valid",
     submitHandler: function () {
-      $('#blog-form').fadeOut();
-      $('.alert-success').delay(1000).fadeIn();
+      $("#blog-form").fadeOut();
+      $(".alert-success").delay(1000).fadeIn();
     },
   });
 
   /***
    **** Portfolio magnific popup
    ***/
-  $('.card.work-item .activator').magnificPopup({
-    type: 'inline',
-    overflowY: 'auto',
+  $(".card.work-item .activator").magnificPopup({
+    type: "inline",
+    overflowY: "auto",
     closeBtnInside: true,
-    mainClass: 'mfp-fade',
+    mainClass: "mfp-fade",
   });
 
   /***
    **** Gallery
    ***/
-  $('.post-lightbox').magnificPopup({
-    delegate: 'a',
-    type: 'image',
-    tLoading: 'Loading image #%curr%...',
-    mainClass: 'mfp-img-mobile',
+  $(".post-lightbox").magnificPopup({
+    delegate: "a",
+    type: "image",
+    tLoading: "Loading image #%curr%...",
+    mainClass: "mfp-img-mobile",
     gallery: {
       enabled: true,
       navigateByImgClick: true,
@@ -219,13 +219,13 @@ function initMap() {
     scrollwheel: false,
   };
 
-  var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+  var map = new google.maps.Map(document.getElementById("map"), mapOptions);
   var marker = new google.maps.Marker({
     position: myLatlng,
     map: map,
-    title: 'We are here!',
+    title: "We are here!",
   });
 }
-if ($('#map').length) {
-  google.maps.event.addDomListener(window, 'load', initMap);
+if ($("#map").length) {
+  google.maps.event.addDomListener(window, "load", initMap);
 }
